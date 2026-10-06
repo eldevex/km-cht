@@ -36,7 +36,7 @@
 
 ## Установка
 
-### Способ 1: Клонирование репозитория (классический)
+### 1. Клонирование репозитория
 
 ```bash
 cd ~
@@ -44,9 +44,24 @@ git clone https://github.com/eldevex/km-cht.git
 cd km-cht
 ```
 
-### Что дальше — одинаково для обоих способов
+### 2. Выдача прав на скрипты
 
-**1️⃣ Установите расширение в браузере**
+После клонирования Git может не сохранить флаг исполняемости. Выполните один раз:
+
+```bash
+chmod +x update-auth.sh start-kimi.sh stop-kimi.sh status.sh kimi-proxy.js extract-kimi-auth.js
+```
+
+Проверьте — у файлов должен быть `x`:
+
+```bash
+ls -la *.sh *.js
+# -rwxr-xr-x ... kimi-proxy.js
+# -rwxr-xr-x ... start-kimi.sh
+# и т.д.
+```
+
+### 3. Установка расширения в браузере
 
 1. Откройте папку `kimi-dumper/` из репозитория — там лежит расширение для снятия дампа.
 2. Откройте **Kiwi** или **Titanium Browser**.
@@ -54,7 +69,7 @@ cd km-cht
 4. Нажмите **Load unpacked** и выберите папку `kimi-dumper/`.
 5. Иконка расширения появится на панели.
 
-**2️⃣ Сделайте дамп auth**
+### 4. Сделайте дамп auth
 
 1. Откройте `www.kimi.ai` в том же браузере.
 2. Залогиньтесь в аккаунт.
@@ -63,7 +78,7 @@ cd km-cht
 5. Отправьте в чат любое сообщение, дождитесь **полного** ответа Kimi.
 6. Иконка расширения → **Снять дамп** → файл `kimi-dump-XXXXX.json` сохранится в `~/storage/downloads/`.
 
-**3️⃣ Загрузите дамп в прокси**
+### 5. Загрузите дамп в прокси
 
 ```bash
 cd ~/km-cht
@@ -81,7 +96,7 @@ cd ~/km-cht
    parent_id:     1a110ba5-...
 ```
 
-**4️⃣ Запустите прокси**
+### 6. Запустите прокси
 
 ```bash
 ./start-kimi.sh
@@ -95,7 +110,7 @@ cd ~/km-cht
 Стоп: pkill -f kimi-proxy.js
 ```
 
-**5️⃣ Проверьте работу**
+### 7. Проверьте работу
 
 ```bash
 # Health check
@@ -211,6 +226,17 @@ pkill -f kimi-proxy.js; sleep 1
 ---
 
 ## ❓ Частые проблемы
+
+**`bash: ./update-auth.sh: Permission denied`**
+
+После `git clone` Git может не сохранить флаг исполняемости файлов. Выполните один раз:
+
+```bash
+cd ~/km-cht
+chmod +x update-auth.sh start-kimi.sh stop-kimi.sh status.sh kimi-proxy.js extract-kimi-auth.js
+```
+
+Проверьте: `ls -la *.sh` — должен быть `-rwxr-xr-x`.
 
 **Прокси отвечает пустотой (`content: ""`)**
 
