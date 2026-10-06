@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Kimi Full Dumper",
+  "version": "5.0.0",
+  "permissions": ["cookies","storage","unlimitedStorage","downloads","activeTab","scripting","webRequest","tabs"],
+  "host_permissions": ["https://www.kimi.com/*","https://*.kimi.com/*","https://*.kimi.ai/*","https://auth.kimi.ai/*","https://auth.kimi.com/*","https://*.moonshot.cn/*","https://*.moonshot.ai/*"],
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [
+    { "matches": ["https://www.kimi.com/*","https://*.kimi.com/*","https://*.kimi.ai/*"], "js": ["content.js"], "run_at": "document_start", "all_frames": true, "world": "MAIN" },
+    { "matches": ["https://www.kimi.com/*","https://*.kimi.com/*","https://*.kimi.ai/*"], "js": ["content-bridge.js"], "run_at": "document_start", "all_frames": true }
+  ],
+  "action": { "default_popup": "popup.html", "default_icon": { "16": "icons/icon16.png", "48": "icons/icon48.png", "128": "icons/icon128.png" } }
+}
